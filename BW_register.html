@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lifeline</title>
+    <script src="js/jquery/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/d3/d3.min.js"></script>
+    <!-- calendar -->
+    <link rel="stylesheet" type="text/css" href="css/fullcalendar/fullcalendar.css">
+    <!-- <link href='./css/fullcalendar.print.min.css' rel='stylesheet' media='print' /> -->
+    <script src="js/fullcalendar/moment.min.js"></script>
+    <script src="js/fullcalendar/fullcalendar.min.js"></script>
+    <script src="js/fullcalendar/locale-all.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery/jquery.qtip.min.css">
+    <script src="./js/jquery/jquery.qtip.min.js"></script>
+    <!-- jquery date-time picker -->
+    <link rel="stylesheet" type="text/css" href="css/jquery/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery/jquery-ui-timepicker-addon.css">
+    <script src="js/jquery/jquery-ui.min.js"></script>
+    <script src="js/jquery/timepicker/jquery-ui-timepicker-addon.js"></script>
+    <script src="js/jquery/i18n/datepicker-de.js"></script>
+    <script src="js/jquery/i18n/datepicker-es.js"></script>
+    <script src="js/jquery/i18n/datepicker-fr.js"></script>
+    <script src="js/jquery/i18n/datepicker-it.js"></script>
+    <script src="js/jquery/i18n/datepicker-ja.js"></script>
+    <script src="js/jquery/i18n/datepicker-ko.js"></script>
+    <script src="js/jquery/i18n/datepicker-ru.js"></script>
+    <script src="js/jquery/i18n/datepicker-th.js"></script>
+    <script src="js/jquery/i18n/datepicker-zh-TW.js"></script>
+    <script src="js/jquery/i18n/datepicker-zh-CN.js"></script>
+    <script src="js/jquery/i18n/jquery-ui-timepicker-addon-i18n.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/ddl.css">
+    <!-- bootstrap-datetimepicker -->
+    <!--
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-datetimepicker.min.css">
+    <script src="js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/bootstrap/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="js/bootstrap/locales/bootstrap-datetimepicker.zh-TW.js"></script>
+    <script src="js/bootstrap/locales/bootstrap-datetimepicker.de.js"></script>
+    <script src="js/bootstrap/locales/bootstrap-datetimepicker.es.js"></script>
+    <script src="js/bootstrap/locales/bootstrap-datetimepicker.fr.js"></script>
+    <script src="js/bootstrap/locales/bootstrap-datetimepicker.it.js"></script>
+    <script src="js/bootstrap/locales/bootstrap-datetimepicker.ja.js"></script>
+    <script src="js/bootstrap/locales/bootstrap-datetimepicker.ko.js"></script>
+    <script src="js/bootstrap/locales/bootstrap-datetimepicker.ru.js"></script>
+    <script src="js/bootstrap/locales/bootstrap-datetimepicker.th.js"></script>
+    -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="js/bootstrap/css3-mediaqueries.min.js"></script>
+    <![endif]-->
+
+
+    <!-- ////////////////////////////////////////////////////////////// -->
+    <!-- ////////////////////下方添加你的代码////////////////////////// -->
+    <!-- ////////////////////////////////////////////////////////////// -->
+    <!-- add your css and js below:  -->
+    <!--
+    like this:
+    <link rel="stylesheet" type="text/css" href="">
+    <script src=""></script>
+    -->
+
+
+</head>
+
+<!-- ////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////下方添加你的代码////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////// -->
+<style type="text/css">
+    /*add your own style below: */
+    .red {
+        color:red;
+    }
+    #ehong-code-input {
+        width:42px;
+        letter-spacing:2px;
+        margin:0px 8px 0px 0px;
+    }
+    .ehong-idcode-val {
+        position:relative;
+        padding:1px 4px 1px 4px;
+        top:0px;
+        *top:-3px;
+        letter-spacing:4px;
+        display:inline;
+        cursor:pointer;
+        font-size:16px;
+        font-family:"Courier New",Courier,monospace;
+        text-decoration:none;
+        font-weight:bold;
+    }
+    .ehong-idcode-val0 {
+        border:solid 1px #A4CDED;
+        background-color:#ECFAFB;
+    }
+    .ehong-idcode-val1 {
+        border:solid 1px #A4CDED;
+        background-color:#FCEFCF;
+    }
+    .ehong-idcode-val2 {
+        border:solid 1px #6C9;
+        background-color:#D0F0DF;
+    }
+    .ehong-idcode-val3 {
+        border:solid 1px #6C9;
+        background-color:#DCDDD8;
+    }
+    .ehong-idcode-val4 {
+        border:solid 1px #6C9;
+        background-color:#F1DEFF;
+    }
+    .ehong-idcode-val5 {
+        border:solid 1px #6C9;
+        background-color:#ACE1F1;
+    }
+    .ehong-code-val-tip {
+        font-size:12px;
+        color:#1098EC;
+        top:0px;
+        *top:-3px;
+        position:relative;
+        margin:0px 0px 0px 4px;
+        cursor:pointer;
+    }
+
+</style>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myDefaultNavbar1" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <a class="navbar-brand" href="#">Lifeline</a> </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="myDefaultNavbar1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a id="settings" href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;设置</a> </li>
+                <li><a id="logout" href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp;退出登录</a> </li>
+                <!-- <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li> -->
+            </ul>
+            <!-- <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form> -->
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<!-- ////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////下方添加你的代码////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////// -->
+<!-- add your own content below: -->
+<div class="container">
+    <form role="form" class="form-horizontal" method="post" action="#">
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-5">
+            <h2 >注册界面</h2>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="inputUsername" class="col-sm-2 col-sm-offset-2 control-label">用户名</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input id="inputUsername" class="form-control" placeholder="请输入用户名"name="username" maxlength="20" type="text" data-toggle="popover"data-trigger="focus"
+                    data-content="用户名只能为字母、数字、下划线，且不能以数字开头" data-container="body" required>
+                </div>
+
+                <span style="color:red;display: none;" class="tips"></span>
+                <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+        </div>
+
+        <div class="form-group has-feedback">
+            <label for="inputPassword1" class="col-sm-2 col-sm-offset-2 control-label">密码</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i> </span>
+                    <input type="password" class="form-control" id="inputPassword1" maxlength="20"name="password1" placeholder="请输入密码"
+                           data-toggle="popover"data-trigger="focus"
+                           data-content="密码至少八位，请至少包含字母、数字、特殊字符中的两类" data-container="body"required>
+                </div>
+                <span style="color:red;display: none;" class="tips"></span>
+                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+        </div>
+
+        <div class="form-group has-feedback">
+            <label for="inputPassword2" class="col-sm-2 col-sm-offset-2 control-label">确认密码</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i> </span>
+                    <input type="password" class="form-control" id="inputPassword2"name="password2" placeholder="确认密码" maxlength="20"required>
+                </div>
+                <span style="color:red;display: none;" class="tips"></span>
+                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="inputEmailadd" class="col-sm-2 col-sm-offset-2 control-label">邮箱</label>
+            <div class="col-sm-4">
+                <div class="input-group ">
+                    <span class="input-group-addon">@ </span>
+                    <input type="text" class="form-control" id="inputEmailadd" name="email" placeholder="邮箱" maxlength="30" required>
+                </div>
+                <span style="color:red;display: none;" class="tips"></span>
+                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+        </div>
+
+                <div class="form-group has-feedback">
+                    <label class="col-sm-2 col-sm-offset-2 control-label" for="idcode-btn">验证码</label>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-qrcode"></span></span>
+                            <input id="idcode-btn" class="form-control" placeholder="请输入验证码" maxlength="4" type="text">
+                        </div>
+                        <span style="color:red;display: none;" class="tips"></span>
+                        <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                        <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+
+                    </div>
+                    <div class="col-sm-4" style="padding-top: 10px">
+                    <div id="idcode" style="background: transparent;">
+                    </div>
+                    </div>
+                </div>
+
+
+        <div class="form-group">
+            <div class=" col-sm-4 col-sm-offset-4">
+                <button type="submit" id="submit" class="btn btn-block btn-primary" >注册</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<!-- footer -->
+<hr>
+<footer class="footer">
+    <div class="container">
+        <div class="row footer-top">
+            <div class="col-sm-4 col-lg-4">
+                <h4>
+                    BlueWhale
+                    <img src="#">
+                </h4>
+                <p>蓝鲸出品</p>
+            </div>
+            <div class="col-sm-8  col-lg-7 col-lg-offset-1">
+                <div class="row about">
+                    <div class="col-xs-6">
+                        <h4>关于</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="about.html">关于我们</a></li>
+                            <li><a href="links.html">友情链接</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6">
+                        <h4>联系方式</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#" title="官方微博" target="_blank">新浪微博</a></li>
+                            <li><a href="mailto:1529825719@qq.com">电子邮件</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row footer-bottom">
+            <ul class="list-inline text-center">
+                Copyright © BlueWhale. All rights reserved.
+                <!-- <li><a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备11008151号</a></li><li>京公网安备11010802014853</li> -->
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<!-- ////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////下方添加你的代码////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////// -->
+<script>
+    // add your javascript below:
+    $(document).ready(function() {
+
+
+    })
+
+    var settings = {
+        e: 'idcode',
+        codeType: {
+            name: 'follow',
+            len: 4
+        }, //len是修改验证码长度的
+        codeTip: '换个验证码?',
+        inputID: 'idcode-btn' //验证元素的ID
+    };
+
+    var _set = {
+        storeLable: 'codeval',
+        store: '#ehong-code-input',
+        codeval: '#ehong-code'
+    }
+    $.idcode = {
+        getCode: function(option) {
+            _commSetting(option);
+            return _storeData(_set.storeLable, null);
+        },
+        setCode: function(option) {
+            _commSetting(option);
+            _setCodeStyle("#" + settings.e, settings.codeType.name, settings.codeType.len);
+
+        },
+        validateCode: function(option) {
+            _commSetting(option);
+            var inputV;
+            if (settings.inputID) {
+                inputV = $('#' + settings.inputID).val();
+
+            } else {
+                inputV = $(_set.store).val();
+            }
+            if (inputV.toUpperCase() == _storeData(_set.storeLable, null).toUpperCase()) { //修改的不区分大小写
+                return true;
+            } else {
+                _setCodeStyle("#" + settings.e, settings.codeType.name, settings.codeType.len);
+                return false;
+            }
+        }
+    };
+
+    function _commSetting(option) {
+        $.extend(settings, option);
+    }
+
+    function _storeData(dataLabel, data) {
+        var store = $(_set.codeval).get(0);
+        if (data) {
+            $.data(store, dataLabel, data);
+        } else {
+            return $.data(store, dataLabel);
+        }
+    }
+
+    function _setCodeStyle(eid, codeType, codeLength) {
+        var codeObj = _createCode(settings.codeType.name, settings.codeType.len);
+        var randNum = Math.floor(Math.random() * 6);
+        var htmlCode = ''
+        if (!settings.inputID) {
+            htmlCode = '<span><input id="ehong-code-input" type="text" maxlength="4" /></span>';
+        }
+        htmlCode += '<div id="ehong-code" class="ehong-idcode-val ehong-idcode-val';
+        htmlCode += String(randNum);
+        htmlCode += '" href="#" onblur="return false" onfocus="return false" oncontextmenu="return false" onclick="$.idcode.setCode()">' + _setStyle(codeObj) + '</div>' + '<span id="ehong-code-tip-ck" class="ehong-code-val-tip" onclick="$.idcode.setCode()">' + settings.codeTip + '</span>';
+        $(eid).html(htmlCode);
+        _storeData(_set.storeLable, codeObj);
+    }
+
+    function _setStyle(codeObj) {
+        var fnCodeObj = new Array();
+        var col = new Array('#BF0C43', '#E69A2A', '#707F02', '#18975F', '#BC3087', '#73C841', '#780320', '#90719B', '#1F72D8', '#D6A03C', '#6B486E', '#243F5F', '#16BDB5');
+        var charIndex;
+        for (var i = 0; i < codeObj.length; i++) {
+            charIndex = Math.floor(Math.random() * col.length);
+            fnCodeObj.push('<font color="' + col[charIndex] + '">' + codeObj.charAt(i) + '</font>');
+        }
+        return fnCodeObj.join('');
+    }
+
+    function _createCode(codeType, codeLength) {
+        var codeObj;
+        if (codeType == 'follow') {
+            codeObj = _createCodeFollow(codeLength);
+        } else if (codeType == 'calc') {
+            codeObj = _createCodeCalc(codeLength);
+        } else {
+            codeObj = "";
+        }
+        return codeObj;
+    }
+
+    function _createCodeCalc(codeLength) {
+        var code1, code2, codeResult;
+        var selectChar = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+        var charIndex;
+        for (var i = 0; i < codeLength; i++) {
+            charIndex = Math.floor(Math.random() * selectChar.length);
+            code1 += selectChar[charIndex];
+
+            charIndex = Math.floor(Math.random() * selectChar.length);
+            code2 += selectChar[charIndex];
+        }
+        return [parseInt(code1), parseInt(code2), parseInt(code1) + parseInt(code2)];
+    }
+
+    function _createCodeFollow(codeLength) {
+        var code = "";
+        var selectChar = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+
+        for (var i = 0; i < codeLength; i++) {
+            var charIndex = Math.floor(Math.random() * selectChar.length);
+            if (charIndex % 2 == 0) {
+                code += selectChar[charIndex].toLowerCase();
+            } else {
+                code += selectChar[charIndex];
+            }
+        }
+        return code;
+    }
+
+    var regUsername = /^[a-zA-Z_][a-zA-Z0-9_]{4,19}$/;
+    var regPasswordSpecial = /[~!@#%&=;':",./<>_\}\]\-\$\(\)\*\+\.\[\?\\\^\{\|]/;
+    var regPasswordAlpha = /[a-zA-Z]/;
+    var regPasswordNum = /[0-9]/;
+    var regEmail=/@/;
+    var password;
+    var confirmpwd ;
+    var check = [false, false, false, false,false];
+    //校验成功函数
+    function success(Obj, counter) {
+        Obj.parent().parent().removeClass('has-error').addClass('has-success');
+        $('.tips').eq(counter).hide();
+        $('.glyphicon-ok').eq(counter).show();
+        $('.glyphicon-remove').eq(counter).hide();
+        check[counter] = true;
+    }
+    // 校验失败函数
+    function fail(Obj, counter, msg) {
+        Obj.parent().parent().removeClass('has-success').addClass('has-error');
+        $('.glyphicon-remove').eq(counter).show();
+        $('.glyphicon-ok').eq(counter).hide();
+        $('.tips').eq(counter).text(msg).show();
+        check[counter] = false;
+    }
+    // 用户名匹配
+    $('.container').find('input').eq(0).change(function() {
+
+
+        if (regUsername.test($(this).val())) {
+            success($(this), 0);
+        } else if ($(this).val().length < 5) {
+            fail($(this), 0, '用户名太短，不能少于5个字符');
+        } else {
+            fail($(this), 0, '用户名只能为英文数字和下划线,且不能以数字开头')
+        }
+
+    });
+
+    // 密码匹配
+
+    // 匹配字母、数字、特殊字符至少两种的函数
+    function atLeastTwo(password) {
+        var a = regPasswordSpecial.test(password) ? 1 : 0;
+        var b = regPasswordAlpha.test(password) ? 1 : 0;
+        var c = regPasswordNum.test(password) ? 1 : 0;
+        return a + b + c;
+
+    }
+
+    $('.container').find('input').eq(1).change(function() {
+
+        password = $(this).val();
+        confirmpwd=$('#inputPassword2').val();
+        if ($(this).val().length < 8) {
+            fail($(this), 1, '密码太短，不能少于8个字符');
+        } else {
+
+
+            if (atLeastTwo($(this).val()) < 2) {
+                fail($(this), 1, '密码中至少包含字母、数字、特殊字符的两种')
+            } else {
+                success($(this), 1);
+            }
+        }
+        if($(this).val()!=confirmpwd)
+        {
+            fail($('.container').find('input').eq(2), 2, '两次输入的密码不一致');
+        }
+        else
+        {
+            success($('.container').find('input').eq(2), 2);
+        }
+    });
+
+
+    // 再次输入密码校验
+    $('.container').find('input').eq(2).change(function() {
+
+        if ($(this).val() == password) {
+            success($(this), 2);
+        } else {
+
+            fail($(this), 2, '两次输入的密码不一致');
+        }
+
+    });
+
+    // 邮箱简单校验
+    $('.container').find('input').eq(3).change(function() {
+
+        if($(this).val().length<7)
+        {
+            fail($(this), 3, '请输入有效的邮箱地址')
+        }
+         else if(regEmail.test($(this).val())==0){
+
+            fail($(this), 3, '请输入有效的邮箱地址')
+        }
+        else{
+            success($(this), 3)
+        }
+
+    });
+    // 验证码
+    $.idcode.setCode();
+
+    $('.container').find('input').eq(4).change(function() {
+        var IsBy = $.idcode.validateCode();
+        if (IsBy) {
+            success($(this), 4);
+        } else {
+            fail($(this), 4, '验证码输入错误');
+        }
+    });
+    $('#submit').click(function(e) {
+        if (!check.every(function(value) {
+                return value == true
+            })) {
+            e.preventDefault();
+            for (key in check) {
+                if (!check[key]) {
+                    $('.container').find('input').eq(key).parent().parent().removeClass('has-success').addClass('has-error')
+                }
+            }
+        }
+    });
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+
+
+</script>
+
+</body>
+</html>
